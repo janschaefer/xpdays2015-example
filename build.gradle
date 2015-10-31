@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.6
+version = '1.0'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.8'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/groups/public/"
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'com.tngtech.jgiven', name: 'jgiven-junit', version: '0.9.3'
+    testCompile group: 'com.tngtech.jgiven', name: 'jgiven-html5-report', version: '0.9.3'
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '1.7.0'
+    testCompile group: 'com.tngtech.java', name: 'junit-dataprovider', version: '1.9.3'
+    testCompile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.10'
+}
+
+test {
+    systemProperty 'jgiven.report.dir', 'build/reports/jgiven/json'
+}
+
+task jgivenReport(type: JavaExec) {
+    main = 'com.tngtech.jgiven.report.ReportGenerator'
+    args '--sourceDir=build/reports/jgiven/json',
+            '--targetDir=build/reports/jgiven/html',
+            '--format=html'
+
+    classpath = configurations.testCompile
+}
+
+test.finalizedBy(jgivenReport)
