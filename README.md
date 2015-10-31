@@ -11,3 +11,7 @@ Then open in your favorite browser:
 ```
 build/reports/jgiven/html/index.html 
 ```
+
+## Online Report
+
+Visit http://janschaefer.github.io/wjax2015-example
