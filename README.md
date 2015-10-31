@@ -10,7 +10,4 @@ Then open in your favorite browser:
 
 ```
 build/reports/jgiven/html/index.html 
-
 ```
-
-
