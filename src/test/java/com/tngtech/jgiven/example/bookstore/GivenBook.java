@@ -1,15 +1,15 @@
 package com.tngtech.jgiven.example.bookstore;
 
+import static com.tngtech.jgiven.annotation.Table.HeaderType.VERTICAL;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.tngtech.jgiven.annotation.AfterStage;
 import com.tngtech.jgiven.annotation.ExtendedDescription;
 import com.tngtech.jgiven.annotation.ProvidedScenarioState;
 import com.tngtech.jgiven.annotation.Table;
 import com.tngtech.jgiven.example.bookstore.entity.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.tngtech.jgiven.annotation.Table.HeaderType.VERTICAL;
 
 public class GivenBook<SELF extends GivenBook<?>> extends GivenCustomer<SELF> {
 
@@ -28,49 +28,49 @@ public class GivenBook<SELF extends GivenBook<?>> extends GivenCustomer<SELF> {
     @ProvidedScenarioState
     protected List<StockItem> stockItems = new ArrayList<StockItem>();
 
-    @ExtendedDescription("The Hitchhiker's Guide to the Galaxy, by default the book is not on stock")
+    @ExtendedDescription( "The Hitchhiker's Guide to the Galaxy, by default the book is not on stock" )
     public SELF a_book() {
         Book book = new Book();
         book.isbn = "0345391802";
         book.author = "Douglas Adams";
         book.name = "The Hitchhiker's Guide to the Galaxy";
         book.priceInEurCents = 1020;
-        books.add(book);
+        books.add( book );
         return self();
     }
 
-    @ExtendedDescription("The Hitchhiker's Guide to the Galaxy with 10 items on stock\n")
+    @ExtendedDescription( "The Hitchhiker's Guide to the Galaxy with 10 items on stock\n" )
     public SELF a_book_on_stock() {
         a_book();
         return the_book_is_on_stock();
     }
 
-    @ExtendedDescription("10 items of the book are on stock")
+    @ExtendedDescription( "10 items of the book are on stock" )
     private SELF the_book_is_on_stock() {
-        return $_items_on_stock(10);
+        return $_items_on_stock( 10 );
     }
 
-    public SELF $_items_on_stock(int numberOfItems) {
+    public SELF $_items_on_stock( int numberOfItems ) {
         StockItem stockItem = new StockItem();
-        stockItem.book = books.get(books.size() - 1);
+        stockItem.book = books.get( books.size() - 1 );
         stockItem.count = numberOfItems;
-        stockItems.add(stockItem);
+        stockItems.add( stockItem );
         return self();
     }
 
     @AfterStage
     public void storeBook() {
-        for (Book book : books) {
-            bookRepository.store(book);
+        for( Book book : books ) {
+            bookRepository.store( book );
         }
 
-        for (StockItem stockItem : stockItems) {
-            stockRepository.store(stockItem);
+        for( StockItem stockItem : stockItems ) {
+            stockRepository.store( stockItem );
         }
     }
 
-    public SELF the_following_book(@Table(includeFields = {"name", "author", "priceInEurCents"}, header = VERTICAL) Book book) {
-        books.add(book);
+    public SELF the_following_book( @Table( includeFields = { "name", "author", "priceInEurCents" }, header = VERTICAL ) Book book ) {
+        books.add( book );
         return self();
     }
 
@@ -80,7 +80,7 @@ public class GivenBook<SELF extends GivenBook<?>> extends GivenCustomer<SELF> {
         public String author;
         public int count;
 
-        public BookOnStock(String id, String name, String author, int count) {
+        public BookOnStock( String id, String name, String author, int count ) {
             this.id = id;
             this.name = name;
             this.author = author;
@@ -88,32 +88,32 @@ public class GivenBook<SELF extends GivenBook<?>> extends GivenCustomer<SELF> {
         }
     }
 
-    public SELF the_following_books_are_on_stock(List<BookOnStock> books) {
-        for (BookOnStock bookOnStock : books) {
-            putOnStock(bookOnStock);
+    public SELF the_following_books_are_on_stock( @Table List<BookOnStock> books ) {
+        for( BookOnStock bookOnStock : books ) {
+            putOnStock( bookOnStock );
         }
         return self();
     }
 
-    public SELF the_following_books_are_on_stock(@Table String[][] books) {
-        for (int row = 1; row < books.length; row++) {
+    public SELF the_following_books_are_on_stock( @Table String[][] books ) {
+        for( int row = 1; row < books.length; row++ ) {
             String[] bookOnStock = books[row];
-            putOnStock(new BookOnStock(bookOnStock[0], bookOnStock[1], bookOnStock[2], Integer.parseInt(books[row][3])));
+            putOnStock( new BookOnStock( bookOnStock[0], bookOnStock[1], bookOnStock[2], Integer.parseInt( books[row][3] ) ) );
         }
         return self();
     }
 
-    private void putOnStock(BookOnStock bookOnStock) {
+    private void putOnStock( BookOnStock bookOnStock ) {
         Book book = new Book();
         book.name = bookOnStock.name;
         book.author = bookOnStock.author;
-        this.books.add(book);
+        this.books.add( book );
 
         StockItem stockItem = new StockItem();
-        stockItem.setId(bookOnStock.id);
+        stockItem.setId( bookOnStock.id );
         stockItem.book = book;
         stockItem.count = bookOnStock.count;
-        this.stockItems.add(stockItem);
+        this.stockItems.add( stockItem );
     }
 
 }
