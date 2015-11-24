@@ -15,7 +15,7 @@ public class GivenCustomer<SELF extends GivenCustomer<?>> extends Stage<SELF> {
     @ProvidedScenarioState
     protected Customer customer;
 
-    @ExtendedDescription("A default customer with name 'John Doe'")
+    @ExtendedDescription( "A default customer with name 'John Doe'" )
     public SELF a_customer() {
         customer = new Customer();
         customer.name = "John Doe";
@@ -24,8 +24,8 @@ public class GivenCustomer<SELF extends GivenCustomer<?>> extends Stage<SELF> {
 
     @AfterStage
     protected void storeCustomer() {
-        if (customer != null) {
-            customerRepository.store(customer);
+        if( customer != null ) {
+            customerRepository.store( customer );
         }
     }
 }
