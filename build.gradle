@@ -18,8 +18,8 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile group: 'com.tngtech.jgiven', name: 'jgiven-junit', version: '0.9.4'
-    testCompile group: 'com.tngtech.jgiven', name: 'jgiven-html5-report', version: '0.9.4'
+    testCompile group: 'com.tngtech.jgiven', name: 'jgiven-junit', version: '0.9.5'
+    testCompile group: 'com.tngtech.jgiven', name: 'jgiven-html5-report', version: '0.9.5'
     testCompile group: 'org.assertj', name: 'assertj-core', version: '1.7.0'
     testCompile group: 'com.tngtech.java', name: 'junit-dataprovider', version: '1.9.3'
     testCompile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.10'
@@ -34,7 +34,7 @@ task jgivenReport(type: JavaExec) {
     args '--sourceDir=build/reports/jgiven/json',
             '--targetDir=build/reports/jgiven/html',
             '--format=html',
-            '--title=JGiven at WJAX 2015'
+            '--title=JGiven at XP Days Germany 2015'
 
     classpath = configurations.testCompile
 }
