@@ -121,7 +121,7 @@
         <li class="off-canvas-close-on-submit">
           <form ng-submit="searchSubmit()">
             <input id="nav-search-mobile" class="search" type="text" placeholder="search in scenarios"
-                   ng-model="nav.search">
+                   ng-model="nav.search" onclick="event.stopPropagation()">
             <i class="fa fa-search search-icon"></i>
             </input>
           </form>
