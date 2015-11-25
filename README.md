@@ -1,5 +1,5 @@
-# WJAX 2015 Example 
-The example project I used for my JGiven presentation at WJAX 2015
+# XP Days Germany 2015 Example
+The example project I used for my JGiven presentation at XP Days Germany 2015
 
 Type
 ```
@@ -9,9 +9,9 @@ Type
 Then open in your favorite browser:
 
 ```
-build/reports/jgiven/html/index.html 
+build/reports/jgiven/html/index.html
 ```
 
 ## Online Report
 
-Visit http://janschaefer.github.io/wjax2015-example
+Visit http://janschaefer.github.io/xpdays2015-example
