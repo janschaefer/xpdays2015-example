@@ -34,7 +34,7 @@ task jgivenReport(type: JavaExec) {
     args '--sourceDir=build/reports/jgiven/json',
             '--targetDir=build/reports/jgiven/html',
             '--format=html',
-            '--title=JGiven at XP Days Germany 2015'
+            '--title=JGiven at XP Days Germany 2015 - https://github.com/janschaefer/xpdays2015-example'
 
     classpath = configurations.testCompile
 }
